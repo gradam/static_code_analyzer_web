@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 3rd party apps
     'django_extensions',
+    'crispy_forms',
     # My apps
     'analyzer.apps.AnalyzerConfig',
     'utils.apps.UtilsConfig',
@@ -127,3 +128,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
   os.path.join(BASE_DIR, 'static/'),
 )
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
