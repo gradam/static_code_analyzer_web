@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
+{% load static from staticfiles %}
 {% load i18n %}
+{% load crispy_forms_filters %}
 {% load crispy_forms_tags %}
+
+{% block additional_css %}
+    <link rel="stylesheet" href="{% static 'analyzer/css/analyzer.css' %}">
+{% endblock %}
 
 {% block body %}
     <div class="jumbotron content">
         {% for project in projects %}
-            <div class="row">
+            <div class="row project">
                 <div class="col-sm-4">
                     <span>{{ project.name }}</span>
                 </div>
@@ -21,13 +27,11 @@
                     {% endif %}
                 </div>
                 <div class="col-sm-1 text-right">
-                    <a class="btn btn-info" type="submit">{% trans "Details"  %}</a>
+                    <a class="btn btn-info" type="submit">{% trans "Details" %}</a>
                 </div>
             </div>
         {% endfor %}
         <hr>
-        {% csrf_token %}
         {% crispy project_form %}
-        <input type="submit" class="btn btn-success" value="{% trans "Add new" %}">
     </div>
 {% endblock %}
