@@ -9,15 +9,16 @@
     {% endblock %}
 </head>
 <body>
-<div class="container page">
-    {% autoescape on %}
-        {#        {% include 'navbar.html' %}#}
+{% autoescape on %}
+    {% include 'navbar.html' %}
+    <div class="container page">
         <div class="jumbotron content">
             {% block body %}
             {% endblock %}
         </div>
-    {% endautoescape %}
-</div>
+    </div>
+{% endautoescape %}
+
 {% include "js.html" %}
 </body>
 </html>
