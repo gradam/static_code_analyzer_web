@@ -30,7 +30,9 @@ class HomeView(View):
 class DetailView(View):
     template_name = 'details.html'
 
-    def get(self, request, project_id):
-        project = Project.objects.get(id=int(project_id))
+    def get(self, request, slug):
+        project = Project.objects.get(slug=slug)
+
         context = {'project': project}
+
         return render(request, self.template_name, context=context)

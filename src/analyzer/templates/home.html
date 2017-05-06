@@ -28,14 +28,14 @@
             <div class="col-sm-2 text-center" title="{% trans 'Last analysed' %}">
                 {% if project.last_analyzed %}
                     <span>{{ project.last_analyzed }}</span>
-                    <button class="btn btn-success">{% trans "Results" %}</button>
                 {% else %}
                     <span>{% trans "Never" %}</span>
                 {% endif %}
             </div>
 
             <div class="col-sm-1 text-right small-center">
-                <a class="btn btn-info" type="submit">{% trans "Details" %}</a>
+                <a class="btn btn-info"
+                   href="{% url 'detail' slug=project.slug %}">{% trans "Details" %}</a>
             </div>
 
         </div>

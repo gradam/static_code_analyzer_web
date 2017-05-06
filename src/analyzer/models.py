@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from multiselectfield import MultiSelectField
+from autoslug import AutoSlugField
+
 from utils.analyzer import Analyzers
 
 
@@ -12,6 +14,7 @@ class Project(models.Model):
     running = models.BooleanField(_('Running'), default=False)
     # List of analyzers to use for this project
     analyzers = MultiSelectField(_('analyzers'), choices=Analyzers.CHOICES, min_choices=1)
+    slug = AutoSlugField(populate_from='name', unique=True)
 
     def __str__(self):
         return self.name
