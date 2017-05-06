@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load crispy_forms_tags %}
 
 {% block body %}
@@ -14,19 +15,19 @@
                 <div class="col-sm-2 text-center">
                     {% if project.last_analyzed %}
                         <span>{{ project.last_analyzed }}</span>
-                        <button class="btn btn-success">Results</button>
+                        <button class="btn btn-success">{% trans "Results" %}</button>
                     {% else %}
-                        <span>Never</span>
+                        <span>{% trans "Never" %}</span>
                     {% endif %}
                 </div>
                 <div class="col-sm-1 text-right">
-                    <a class="btn btn-info" type="submit">Details</a>
+                    <a class="btn btn-info" type="submit">{% trans "Details"  %}</a>
                 </div>
             </div>
         {% endfor %}
         <hr>
         {% csrf_token %}
         {% crispy project_form %}
-        <button class="btn btn-success">Add new</button>
+        <input type="submit" class="btn btn-success" value="{% trans "Add new" %}">
     </div>
 {% endblock %}
