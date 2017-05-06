@@ -7,12 +7,22 @@ from .models import Project
 
 class ProjectForm(forms.ModelForm):
 
+    class Meta:
+        model = Project
+        fields = ('name', 'url', 'analyzers')
+
+
+class NewProjectForm(ProjectForm):
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
         self.form_method = 'post'
         self.helper.add_input(Submit('submit', _('Add new')))
         super().__init__(*args, **kwargs)
 
-    class Meta:
-        model = Project
-        fields = ('name', 'url', 'analyzers')
+
+class EditProjectForm(ProjectForm):
+    def __init__(self, *args, **kwargs):
+        self.helper = FormHelper()
+        self.form_method = 'post'
+        self.helper.add_input(Submit('submit', _('Save changes')))
+        super().__init__(*args, **kwargs)

@@ -8,5 +8,6 @@
 {% endblock %}
 
 {% block body %}
-    {{ project.name }}
+    <h2>{{ project.name }}</h2>
+    {% crispy form %}
 {% endblock %}
