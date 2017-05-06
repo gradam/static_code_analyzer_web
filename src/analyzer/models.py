@@ -1,7 +1,9 @@
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from multiselectfield import MultiSelectField
 from autoslug import AutoSlugField
+import jsonfield
 
 from utils.analyzer import Analyzers
 
@@ -18,3 +20,9 @@ class Project(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Result(models.Model):
+    results = jsonfield.JSONField()
+    date = models.DateTimeField(_('Date'), default=timezone.now)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, verbose_name=_('Project'))
