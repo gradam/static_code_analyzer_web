@@ -25,3 +25,7 @@ class HomeView(View):
             context = {'project_form': form,
                        'projects': projects}
             return render(request, self.template_name, context=context)
+
+
+class DetailView(View):
+    pass
