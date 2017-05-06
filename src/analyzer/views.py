@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from .forms import NewProjectForm, EditProjectForm
-from .models import Project
+from .models import Project, Result
 
 
 class HomeView(View):
@@ -35,12 +35,18 @@ class DetailView(View):
     def get_instance(slug):
         return Project.objects.get(slug=slug)
 
+    @staticmethod
+    def get_context(project_instance, form):
+        results = Result.objects.filter(project=project_instance)
+        context = {'project': project_instance,
+                   'form': form,
+                   'results': results}
+        return context
+
     def get(self, request, slug):
         project_instance = self.get_instance(slug)
         form = self.form_class(instance=project_instance)
-        context = {'project': project_instance,
-                   'form': form}
-
+        context = self.get_context(project_instance, form)
         return render(request, self.template_name, context=context)
 
     def post(self, request, slug, *args, **kwargs):
@@ -50,6 +56,5 @@ class DetailView(View):
             form.save()
             return redirect('detail', slug=slug)
         else:
-            context = {'project': project_instance,
-                       'form': form}
+            context = self.get_context(project_instance, form)
             return render(request, self.template_name, context=context)

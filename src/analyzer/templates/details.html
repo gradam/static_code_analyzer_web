@@ -1,8 +1,27 @@
 {% extends 'base.html' %}
+{% load static from staticfiles %}
 {% load i18n %}
 {% load crispy_forms_tags %}
 
+{% block additional_css %}
+    <link rel="stylesheet" href="{% static 'analyzer/css/detail.css' %}">
+{% endblock %}
+
 {% block body %}
-    <h2>{{ project.name }}</h2>
+    <div class="row title">
+
+        <div id="project_name" class="col-xs-8 text-left">
+            <h2>{{ project.name }}</h2>
+        </div>
+
+        <div id="run-button" class="col-xs-4 text-right">
+            {% if project.running %}
+                <span class="fa fa-circle-o-notch fa-spin fa-3x fa-f"></span>
+            {% else %}
+                <a class="btn btn-info">{% trans 'Run analisation' %}</a>
+            {% endif %}
+        </div>
+
+    </div>
     {% crispy form %}
 {% endblock %}
