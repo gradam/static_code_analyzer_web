@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block additional_css %}
+    <link rel="stylesheet" href="{% static 'analyzer/css/home.css' %}">
+{% endblock %}
+
+{% block body %}
+    {{ project.name }}
+{% endblock %}

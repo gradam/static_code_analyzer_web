@@ -28,4 +28,9 @@ class HomeView(View):
 
 
 class DetailView(View):
-    pass
+    template_name = 'details.html'
+
+    def get(self, request, project_id):
+        project = Project.objects.get(id=int(project_id))
+        context = {'project': project}
+        return render(request, self.template_name, context=context)

@@ -1,21 +1,23 @@
 {% load static from staticfiles %}
 
 <html lang="pl">
-    <head>
-        {% include 'head.html' %}
-        {% block head %}
-        {% endblock %}
-        {% block additional_css %}
-        {% endblock %}
-    </head>
+<head>
+    {% include 'head.html' %}
+    {% block head %}
+    {% endblock %}
+    {% block additional_css %}
+    {% endblock %}
+</head>
 <body>
-    <div class="container page">
+<div class="container page">
     {% autoescape on %}
-{#        {% include 'navbar.html' %}#}
-        {% block body %}
-        {% endblock %}
+        {#        {% include 'navbar.html' %}#}
+        <div class="jumbotron content">
+            {% block body %}
+            {% endblock %}
+        </div>
     {% endautoescape %}
-    </div>
-    {% include "js.html" %}
+</div>
+{% include "js.html" %}
 </body>
 </html>

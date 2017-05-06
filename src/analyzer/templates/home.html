@@ -4,44 +4,42 @@
 {% load crispy_forms_tags %}
 
 {% block additional_css %}
-    <link rel="stylesheet" href="{% static 'analyzer/css/analyzer.css' %}">
+    <link rel="stylesheet" href="{% static 'analyzer/css/home.css' %}">
 {% endblock %}
 
 {% block body %}
-    <div class="jumbotron content">
-        {% for project in projects %}
-            <div class="row project">
+    {% for project in projects %}
+        <div class="row project">
 
-                <div class="col-sm-4 small-center">
-                    {% if project.running %}
-                        <span class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"
-                              title="{% trans 'Analysis is running' %}"></span>
-                    {% else %}
-                        <span class="fa fa-check" title="{% trans 'All tasks finished' %}"></span>
-                    {% endif %}
-                    <span title="{% trans 'project name' %}">{{ project.name }}</span>
-                </div>
-
-                <div class="col-sm-5 text-center">
-                    <span title="{% trans 'Project url' %}">{{ project.url }}</span>
-                </div>
-
-                <div class="col-sm-2 text-center" title="{% trans 'Last analysed' %}">
-                    {% if project.last_analyzed %}
-                        <span>{{ project.last_analyzed }}</span>
-                        <button class="btn btn-success">{% trans "Results" %}</button>
-                    {% else %}
-                        <span>{% trans "Never" %}</span>
-                    {% endif %}
-                </div>
-
-                <div class="col-sm-1 text-right small-center">
-                    <a class="btn btn-info" type="submit">{% trans "Details" %}</a>
-                </div>
-
+            <div class="col-sm-4 small-center">
+                {% if project.running %}
+                    <span class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"
+                          title="{% trans 'Analysis is running' %}"></span>
+                {% else %}
+                    <span class="fa fa-check" title="{% trans 'All tasks finished' %}"></span>
+                {% endif %}
+                <span title="{% trans 'project name' %}">{{ project.name }}</span>
             </div>
-            <hr>
-        {% endfor %}
-        {% crispy project_form %}
-    </div>
+
+            <div class="col-sm-5 text-center">
+                <span title="{% trans 'Project url' %}">{{ project.url }}</span>
+            </div>
+
+            <div class="col-sm-2 text-center" title="{% trans 'Last analysed' %}">
+                {% if project.last_analyzed %}
+                    <span>{{ project.last_analyzed }}</span>
+                    <button class="btn btn-success">{% trans "Results" %}</button>
+                {% else %}
+                    <span>{% trans "Never" %}</span>
+                {% endif %}
+            </div>
+
+            <div class="col-sm-1 text-right small-center">
+                <a class="btn btn-info" type="submit">{% trans "Details" %}</a>
+            </div>
+
+        </div>
+        <hr>
+    {% endfor %}
+    {% crispy project_form %}
 {% endblock %}
