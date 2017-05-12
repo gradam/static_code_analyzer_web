@@ -13,7 +13,7 @@
 
             <div class="col-sm-4 small-center">
                 {% if project.running %}
-                    <span class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"
+                    <span class="fa fa-circle-o-notch fa-spin fa-fw"
                           title="{% trans 'Analysis is running' %}"></span>
                 {% else %}
                     <span class="fa fa-check" title="{% trans 'All tasks finished' %}"></span>
@@ -35,7 +35,7 @@
 
             <div class="col-sm-1 text-right small-center">
                 <a class="btn btn-info"
-                   href="{% url 'detail' slug=project.slug %}">{% trans "Details" %}</a>
+                   href="{% url 'detail' slug=project.slug %}">{% trans "Go to" %}</a>
             </div>
 
         </div>

@@ -28,4 +28,8 @@ class Result(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE, verbose_name=_('Project'))
 
     def __str__(self):
-        return f'{self.project.name}: {self.date}'
+        return f'{self.project.name}'
+
+    @property
+    def count(self):
+        return sum([x[1] for x in self.results.values()])

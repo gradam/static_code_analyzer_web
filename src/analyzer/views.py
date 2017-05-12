@@ -68,6 +68,7 @@ class RunAnalysisView(View):
     def get(self, request, project_id, *args, **kwargs):
         project = Project.objects.get(id=int(project_id))
         project.running = True
+        project.last_analyzed = timezone.now()
         project.save()
         run_analysis(int(project_id), schedule=timezone.now())
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

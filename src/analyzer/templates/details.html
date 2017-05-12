@@ -4,7 +4,7 @@
 {% load crispy_forms_tags %}
 
 {% block additional_css %}
-    <link rel="stylesheet" href="{% static 'analyzer/css/detail.css' %}">
+    <link rel="stylesheet" href="{% static 'analyzer/css/details.css' %}">
 {% endblock %}
 
 {% block body %}
@@ -17,7 +17,7 @@
         <div id="run-button" class="col-xs-7 text-right">
             {% if project.running %}
                 <span>{% trans 'Analysis is running. Please refresh the page after couple of seconds' %}</span>
-                <span class="fa fa-circle-o-notch fa-spin fa-2x fa-f"></span>
+                <span class="fa fa-circle-o-notch fa-spin fa-f"></span>
             {% else %}
                 <a class="btn btn-info"
                    href="{% url 'run' project_id=project.id %}">{% trans 'Run analysis' %}</a>
@@ -25,5 +25,39 @@
         </div>
 
     </div>
+    <hr>
     {% crispy form %}
+    <div id="results">
+        {% for result in project.result_set.all reversed %}
+            <hr>
+            <div class="row result">
+                <details>
+                    <summary><span class="summary">{{ result.date }} ({{ result.count }})</span></summary>
+                    <div class="details">
+                        {% for analyser, massages in result.results.items %}
+                            <p>{{ analyser }} ({{ massages.1 }})</p>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        {% for key in massages.0.0 %}
+                                            <th>{{ key }}</th>
+                                        {% endfor %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for massage in massages.0 %}
+                                        <tr>
+                                            {% for value in massage.values %}
+                                                <th>{{ value }}</th>
+                                            {% endfor %}
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        {% endfor %}
+                    </div>
+                </details>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

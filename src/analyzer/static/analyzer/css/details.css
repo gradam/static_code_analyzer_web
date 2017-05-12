@@ -1,0 +1,28 @@
+h2 {
+    margin: 0;
+}
+
+.title {
+    margin-bottom: 30px;
+}
+
+summary {
+    margin-left: 5px;
+}
+
+summary:hover {
+    cursor: pointer;
+}
+
+.details {
+    background-color: white;
+}
+
+.summary {
+    font-size: 20px;
+}
+
+.result {
+    background-color: #c1c1c1;
+    border-radius: 5px;
+}
