@@ -18,7 +18,8 @@
             {% if project.running %}
                 <span class="fa fa-circle-o-notch fa-spin fa-3x fa-f"></span>
             {% else %}
-                <a class="btn btn-info">{% trans 'Run analisation' %}</a>
+                <a class="btn btn-info"
+                   href="{% url 'run' project_id=project.id %}">{% trans 'Run analysis' %}</a>
             {% endif %}
         </div>
 

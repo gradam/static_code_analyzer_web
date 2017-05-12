@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
+from django.utils import timezone
+from django.http import HttpResponseRedirect
 from django.views import View
 from .forms import NewProjectForm, EditProjectForm
 from .models import Project, Result
+from .utils import run_analysis
 
 
 class HomeView(View):
@@ -58,3 +61,13 @@ class DetailView(View):
         else:
             context = self.get_context(project_instance, form)
             return render(request, self.template_name, context=context)
+
+
+class RunAnalysisView(View):
+
+    def get(self, request, project_id, *args, **kwargs):
+        project = Project.objects.get(id=int(project_id))
+        project.running = True
+        project.save()
+        run_analysis(int(project_id), schedule=timezone.now())
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

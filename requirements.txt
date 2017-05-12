@@ -7,3 +7,4 @@ django-multiselectfield==0.1.5
 django-autoslug==1.9.3
 django-jsonfield==1.0.1
 django-background-tasks==1.1.10
+ptpython==0.39

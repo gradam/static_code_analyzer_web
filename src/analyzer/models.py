@@ -26,3 +26,6 @@ class Result(models.Model):
     results = jsonfield.JSONField()
     date = models.DateTimeField(_('Date'), default=timezone.now)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, verbose_name=_('Project'))
+
+    def __str__(self):
+        return f'{self.project.name}: {self.date}'
