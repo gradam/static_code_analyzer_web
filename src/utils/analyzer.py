@@ -25,3 +25,4 @@ def analyze_code(root_dir, analyzers, ignore=None):
     files = [y for x in os.walk(root_dir) for y in glob(os.path.join(x[0], '*.py'))]
     for analyzer in analyzers:
         reports[analyzer] = getattr(Analyzers, f'use_{analyzer}')(files, ignore)
+    return reports
