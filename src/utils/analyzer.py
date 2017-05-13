@@ -5,6 +5,7 @@ import io
 from contextlib import redirect_stdout
 import re
 
+from django.utils.translation import ugettext_lazy as _
 from flake8.api import legacy as flake8
 from pylint import epylint as lint
 
@@ -48,13 +49,10 @@ class Analyzers:
                     'massage': massage
                 })
             elif line.startswith('Your code has been rated'):
-                current, *_ = pattern.findall(line)
+                current, *__ = pattern.findall(line)
                 score += float(current)
                 counter += 1
-        if int(score / counter) == score / counter:
-            final_score = '{}/10'.format(int(score / counter))
-        else:
-            final_score = '{:.2f}/10'.format(score / counter)
+        final_score = _('Your code has been rated at {:.2f}/10'.format(score / counter))
         return parsed_massage, final_score
 
     def use_flake8(self, files, ignore):
