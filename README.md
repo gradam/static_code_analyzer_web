@@ -13,12 +13,13 @@
 ## Adding new analyzers
 1. Go to file src/utils/analyzers.py
 2. In class `Analyzers` add your analyzer name (further referred to as _MY_CUSTOM_ANALYZER_) to `ALL` and `CHOICES` eg:
-``` python3
+``` python
 ALL = ('flake8', 'pylint', 'MY_CUSTOM_ANALYZER')
 CHOICES = (('flake8', 'flake8'), ('pylint', 'pylint'), ('MY_CUSTOM_ANALYZER','MY_CUSTOM_ANALYZER'))
 ```
 3. In the same class create method with name `use_MY_CUSTOM_ANALYZER`. Two arguments will be passed to this function:
-    * `files` - List of paths to files to check eg: `['/tmp/tt23123/my-project/utils/utils.py', '/tmp/tt23123/my-project/another.py']`
+    * `files` - List of paths to files to analyze eg: 
+    `['/tmp/tt23123/my-project/utils/utils.py', '/tmp/tt23123/my-project/another.py']`
     * `ignore` - Currently is always an empty list.
     
     This function should return data in the following format:
