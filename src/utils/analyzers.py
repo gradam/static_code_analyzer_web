@@ -52,11 +52,10 @@ class Analyzers:
                 current, *__ = pattern.findall(line)
                 score += float(current)
                 counter += 1
-        final_score = _('Your code has been rated at {:.2f}/10'.format(score / counter))
+        final_score = 'Your code has been rated at {:.2f}/10'.format(score / counter)
         return parsed_massage, final_score
 
     def use_flake8(self, files, ignore):
-        logging.info('Running flake8')
         style_guide = flake8.get_style_guide(ignore=ignore)
         output = io.StringIO()
         with redirect_stdout(output):
@@ -84,6 +83,7 @@ def analyze_code(root_dir, analyzers_list, ignore=None):
     files = [y for x in os.walk(root_dir) for y in glob(os.path.join(x[0], '*.py'))]
     analyzers = Analyzers(root_dir)
     for analyzer in analyzers_list:
+        logging.info(f'Running {analyzer}')
         report, additional_information = getattr(analyzers, f'use_{analyzer}')(files, ignore)
         reports[analyzer] = [report, len(report), additional_information]
     logging.info(reports)
