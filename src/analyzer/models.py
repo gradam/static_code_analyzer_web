@@ -5,7 +5,7 @@ from multiselectfield import MultiSelectField
 from autoslug import AutoSlugField
 import jsonfield
 
-from utils.analyzer import Analyzers
+from utils.analyzers import Analyzers
 
 
 # Create your models here.

@@ -1,6 +1,6 @@
 from background_task import background
 from .models import Project, Result
-from utils.analyzer import analyze_code
+from utils.analyzers import analyze_code
 from utils.code_getters import get_from_git
 import logging
 
