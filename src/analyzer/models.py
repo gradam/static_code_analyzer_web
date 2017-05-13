@@ -33,3 +33,11 @@ class Result(models.Model):
     @property
     def count(self):
         return sum([x[1] for x in self.results.values()])
+
+
+class Subscription(models.Model):
+    email = models.EmailField(_('Email'))
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, verbose_name=_('Project'))
+
+    class Meta:
+        unique_together = (('email', 'project'),)

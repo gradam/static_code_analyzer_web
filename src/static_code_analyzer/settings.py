@@ -128,6 +128,10 @@ STATICFILES_DIRS = (
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
+# CHANGE FOR PRODUCTION !!!!!!!!!!!!!!!!!!
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
 if DEBUG:
     # will output to your console
     logging.basicConfig(
