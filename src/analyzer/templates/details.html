@@ -32,19 +32,21 @@
             <hr>
             <div class="row result">
                 <details>
-                    <summary><span class="summary">{{ result.date }} ({{ result.count }})</span></summary>
+                    <summary><span class="summary">{{ result.date }} ({{ result.count }})</span>
+                    </summary>
                     <div class="details">
                         {% for analyser, massages in result.results.items %}
-                            <p>{{ analyser }} ({{ massages.1 }})</p>
-                            <table class="table table-striped">
-                                <thead>
+                            <details>
+                                <summary class="summary">{{ analyser }} ({{ massages.1 }})</summary>
+                                <table class="table table-striped">
+                                    <thead>
                                     <tr>
                                         {% for key in massages.0.0 %}
                                             <th>{{ key }}</th>
                                         {% endfor %}
                                     </tr>
-                                </thead>
-                                <tbody>
+                                    </thead>
+                                    <tbody>
                                     {% for massage in massages.0 %}
                                         <tr>
                                             {% for value in massage.values %}
@@ -52,8 +54,14 @@
                                             {% endfor %}
                                         </tr>
                                     {% endfor %}
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th>{{ massages.2 }}</th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </details>
                         {% endfor %}
                     </div>
                 </details>

@@ -8,10 +8,28 @@
 {% endblock %}
 
 {% block body %}
+    <div class="header">
+        <div class="col-sm-3 small-center">
+            {% trans 'Project name' %}
+        </div>
+
+        <div class="col-sm-5 text-center">
+            {% trans 'Project url' %}
+        </div>
+
+        <div class="col-sm-3 text-center" title="{% trans 'Last analysed' %}">
+            {% trans 'Last anayzed' %}
+        </div>
+
+        <div class="col-sm-1 text-right small-center">
+            {% trans '' %}
+        </div>
+    </div>
+    <hr>
     {% for project in projects %}
         <div class="row project">
 
-            <div class="col-sm-4 small-center">
+            <div class="col-sm-3 small-center">
                 {% if project.running %}
                     <span class="fa fa-circle-o-notch fa-spin fa-fw"
                           title="{% trans 'Analysis is running' %}"></span>
@@ -25,7 +43,7 @@
                 <span title="{% trans 'Project url' %}">{{ project.url }}</span>
             </div>
 
-            <div class="col-sm-2 text-center" title="{% trans 'Last analysed' %}">
+            <div class="col-sm-3 text-center" title="{% trans 'Last analysed' %}">
                 {% if project.last_analyzed %}
                     <span>{{ project.last_analyzed }}</span>
                 {% else %}

@@ -51,10 +51,11 @@ class Analyzers:
                 current, *_ = pattern.findall(line)
                 score += float(current)
                 counter += 1
-        final_score = '{:.2f}/10'.format(score/counter)
+        if int(score / counter) == score / counter:
+            final_score = '{}/10'.format(int(score / counter))
+        else:
+            final_score = '{:.2f}/10'.format(score / counter)
         return parsed_massage, final_score
-
-
 
     def use_flake8(self, files, ignore):
         logging.info('Running flake8')
@@ -63,7 +64,8 @@ class Analyzers:
         with redirect_stdout(output):
             style_guide.check_files(files)
         report = output.getvalue().split('\n')
-        return self._parse_flake8(report)
+        final_information = ''
+        return self._parse_flake8(report), final_information
 
     def use_pylint(self, files, *_):
         results = ""
@@ -72,7 +74,8 @@ class Analyzers:
             text = pylint_stdout.getvalue()
             results += '\n' + text
         results = [line.strip() for line in results.split('\n')]
-
+        parsed_massage, final_score = self._parse_pylint(results)
+        return parsed_massage, final_score
 
 
 def analyze_code(root_dir, analyzers_list, ignore=None):
@@ -83,7 +86,7 @@ def analyze_code(root_dir, analyzers_list, ignore=None):
     files = [y for x in os.walk(root_dir) for y in glob(os.path.join(x[0], '*.py'))]
     analyzers = Analyzers(root_dir)
     for analyzer in analyzers_list:
-        report = getattr(analyzers, f'use_{analyzer}')(files, ignore)
-        reports[analyzer] = [report, len(report)]
+        report, additional_information = getattr(analyzers, f'use_{analyzer}')(files, ignore)
+        reports[analyzer] = [report, len(report), additional_information]
     logging.info(reports)
     return reports
