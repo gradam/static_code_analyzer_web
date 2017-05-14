@@ -2,6 +2,7 @@ import logging
 import shutil
 import tempfile
 from contextlib import contextmanager
+
 from git import Repo
 
 

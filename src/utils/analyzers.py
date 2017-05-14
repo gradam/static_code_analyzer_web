@@ -1,11 +1,10 @@
-import os
-from glob import glob
-import logging
 import io
-from contextlib import redirect_stdout
+import logging
+import os
 import re
+from contextlib import redirect_stdout
+from glob import glob
 
-from django.utils.translation import ugettext_lazy as _
 from flake8.api import legacy as flake8
 from pylint import epylint as lint
 

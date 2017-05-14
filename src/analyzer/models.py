@@ -1,9 +1,9 @@
+import jsonfield
+from autoslug import AutoSlugField
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from multiselectfield import MultiSelectField
-from autoslug import AutoSlugField
-import jsonfield
 
 from utils.analyzers import Analyzers
 

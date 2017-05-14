@@ -1,11 +1,12 @@
+import logging
+
+from background_task import background
 from django.core.mail import send_mail
 from django.urls import reverse
 
-from background_task import background
-from .models import Project, Result, Subscription
 from utils.analyzers import analyze_code
 from utils.code_getters import get_from_git
-import logging
+from .models import Project, Result, Subscription
 
 
 @background(schedule=5)

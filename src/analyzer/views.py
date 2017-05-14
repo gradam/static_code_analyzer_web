@@ -1,7 +1,8 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.utils import timezone
-from django.http import HttpResponseRedirect
 from django.views import View
+
 from .forms import NewProjectForm, EditProjectForm, SubscriptionForm
 from .models import Project, Result, Subscription
 from .utils import run_analysis

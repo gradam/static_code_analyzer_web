@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from .models import Project, Result, Subscription
 
 admin.site.register(Project)
