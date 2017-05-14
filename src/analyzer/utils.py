@@ -28,8 +28,8 @@ def send_notification_email(project: Project, host: str):
     url = reverse('detail', kwargs={'slug': project.slug})
     title = f'Finished running analyzers for project `{project.name}`'
     massage = f"""
-    Finished running analyzers for project `{host}/{project.name}`. 
-    See the results at {url}.
+    Finished running analyzers for project `{project.name}`. 
+    See the results at {host}/{url}.
     """
     from_user = 'admin@127.0.0.1'
     send_mail(

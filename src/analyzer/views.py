@@ -80,8 +80,6 @@ class DetailView(View):
                 return render(request, self.template_name, context=context, status=400)
 
 
-
-
 class RunAnalysisView(View):
 
     def get(self, request, project_id, *args, **kwargs):
