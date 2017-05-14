@@ -40,3 +40,22 @@ Couple of very simple tests were created just to ensure that views are loading p
 
 To run tests, run this command:
 `pytest src/`
+
+
+## Known issues
+1. Not perfect responsive design. On smaller screens texts are a bit small.
+2. Because of nature of this project it is using sqlite as a database which can't support a high level of concurrency. 
+Which leads to `django.db.utils.OperationalError: database is locked` if you try to run more then 1 project simultaneously.
+It can be fixed by switching to another database backend (eg. Postgresql or MySql) or switching from `django-background-tasks` to `celery` with eg. Redis backend.
+I've went with django-background-tasks and sqlite because I wanted for this project to depend only on pip packages and GIT.
+3. This is not at all production ready
+    * Debug is set to True
+    * Email account is not set up. (It just prints out the content to console atm.)
+    * CORS are not properly set up
+    * And much more
+4. Number of tests is way to low. Currently they only checks if web pages are loading properly.
+5. There is no authentication system so everyone can add/delete projects, subscribers, etc.
+6. Page requires manual refresh to see if analysis had finished running.
+7. Currently there is no easy way of configurating tools used to analyse the code (eg. pylint)
+8. Does not check the correctness of the urls.
+9. Lack of proper error handling.
