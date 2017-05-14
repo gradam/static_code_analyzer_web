@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.utils import timezone
 from django.http import HttpResponseRedirect
 from django.views import View
-from .forms import NewProjectForm, EditProjectForm
-from .models import Project, Result
+from .forms import NewProjectForm, EditProjectForm, SubscriptionForm
+from .models import Project, Result, Subscription
 from .utils import run_analysis
 
 
@@ -39,28 +39,47 @@ class DetailView(View):
         return Project.objects.get(slug=slug)
 
     @staticmethod
-    def get_context(project_instance, form):
+    def get_context(project_instance, form, subscription_form):
         results = Result.objects.filter(project=project_instance)
+        subscriptions = Subscription.objects.filter(project=project_instance)
+
         context = {'project': project_instance,
                    'form': form,
-                   'results': results}
+                   'results': results,
+                   'subscriptions': subscriptions,
+                   'subscription_form': subscription_form}
         return context
 
     def get(self, request, slug):
         project_instance = self.get_instance(slug)
         form = self.form_class(instance=project_instance)
-        context = self.get_context(project_instance, form)
+        context = self.get_context(project_instance, form,SubscriptionForm())
         return render(request, self.template_name, context=context)
 
     def post(self, request, slug, *args, **kwargs):
         project_instance = self.get_instance(slug)
-        form = self.form_class(request.POST, instance=project_instance)
-        if form.is_valid():
-            form.save()
-            return redirect('detail', slug=slug)
+        data = request.POST
+        form = self.form_class(instance=project_instance)
+        if 'url' in data:
+            form = self.form_class(data, instance=project_instance)
+            if form.is_valid():
+                form.save()
+                return redirect('detail', slug=slug)
+            else:
+                context = self.get_context(project_instance, form, SubscriptionForm())
+                return render(request, self.template_name, context=context, status=400)
         else:
-            context = self.get_context(project_instance, form)
-            return render(request, self.template_name, context=context, status=400)
+            subscription_form = SubscriptionForm(data)
+            # subscription_form.data['project'] = project_instance
+            if subscription_form.is_valid():
+                email = data['email']
+                Subscription.objects.create(email=email, project=project_instance)
+                return redirect('detail', slug=slug)
+            else:
+                context = self.get_context(project_instance, form, subscription_form)
+                return render(request, self.template_name, context=context, status=400)
+
+
 
 
 class RunAnalysisView(View):
@@ -71,4 +90,11 @@ class RunAnalysisView(View):
         project.last_analyzed = timezone.now()
         project.save()
         run_analysis(int(project_id), request.get_host(), schedule=timezone.now())
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+class DeleteSubscriptionView(View):
+
+    def get(self, request, subscription_id, *args, **kwargs):
+        Subscription.objects.get(id=int(subscription_id)).delete()
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

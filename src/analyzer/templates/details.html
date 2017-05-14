@@ -27,7 +27,33 @@
     </div>
     <hr>
     {% crispy form %}
+    <hr>
+    {% crispy subscription_form %}
+    <details>
+        <summary><span class="title_text">{% trans 'subscribers' %}</span></summary>
+
+        {% for subscription in subscriptions %}
+            <hr>
+            <div class="row">
+                <div class="col-xs-10">
+                    <p class="email">{{ subscription.email }}</p>
+                </div>
+                <div class="col-xs-2 text-right">
+                    <a class="btn btn-danger"
+                       href="{% url 'delete-subscription' subscription_id=subscription.id %}">
+                        {% trans 'delete' %}
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+
+    </details>
+
+    <hr>
+
     <div id="results">
+    <details>
+    <summary class="title_text">{% trans 'Results' %}</summary>
         {% for result in project.result_set.all reversed %}
             <hr>
             <div class="row result">
@@ -67,5 +93,6 @@
                 </details>
             </div>
         {% endfor %}
+    </details>
     </div>
 {% endblock %}

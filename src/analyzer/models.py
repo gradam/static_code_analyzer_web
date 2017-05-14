@@ -41,3 +41,6 @@ class Subscription(models.Model):
 
     class Meta:
         unique_together = (('email', 'project'),)
+
+    def __str__(self):
+        return f'{self.project.name}: {self.email}'
