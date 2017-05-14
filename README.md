@@ -6,9 +6,10 @@
 1. Clone repository `git clone git@github.com:gradam/static_code_analyzer_web.git`
 2. Move to the cloned directory `cd static_code_analyzer`
 3. Install required packages `pip install -r requirements.txt`
-4. Run `python src/manage.py runserver`
-5. Open new terminal in the same location
-6. Run `python src/manage.py process_tasks --sleep 1`
+4. Run `python src/manage.py migrate`
+5. Run `python src/manage.py runserver`
+6. Open new terminal in the same location
+7. Run `python src/manage.py process_tasks --sleep 1`
 
 ## Adding new analyzers
 1. Go to file src/utils/analyzers.py
