@@ -10,11 +10,11 @@
 {% block body %}
     <div class="row title">
 
-        <div id="project_name" class="col-xs-5 text-left">
+        <div id="project_name" class="col-sm-5 text-left">
             <h2>{{ project.name }}</h2>
         </div>
 
-        <div id="run-button" class="col-xs-7 text-right">
+        <div id="run-button" class="col-sm-7 text-right">
             {% if project.running %}
                 <span>{% trans 'Analysis is running. Please refresh the page after couple of seconds' %}</span>
                 <span class="fa fa-circle-o-notch fa-spin fa-f"></span>

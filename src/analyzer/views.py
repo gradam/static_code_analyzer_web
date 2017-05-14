@@ -60,7 +60,7 @@ class DetailView(View):
             return redirect('detail', slug=slug)
         else:
             context = self.get_context(project_instance, form)
-            return render(request, self.template_name, context=context)
+            return render(request, self.template_name, context=context, status=400)
 
 
 class RunAnalysisView(View):
