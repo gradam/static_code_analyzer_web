@@ -34,3 +34,9 @@ CHOICES = (('flake8', 'flake8'), ('pylint', 'pylint'), ('MY_CUSTOM_ANALYZER','MY
     ]
     ```
 4. That's it. You are ready to go.
+
+## Running tests
+Couple of very simple tests were created just to ensure that views are loading properly.
+
+To run tests, run this command:
+`pytest src/`
