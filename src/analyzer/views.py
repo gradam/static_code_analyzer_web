@@ -73,7 +73,7 @@ class DetailView(View):
             # subscription_form.data['project'] = project_instance
             if subscription_form.is_valid():
                 email = data['email']
-                Subscription.objects.create(email=email, project=project_instance)
+                Subscription.objects.get_or_create(email=email, project=project_instance)
                 return redirect('detail', slug=slug)
             else:
                 context = self.get_context(project_instance, form, subscription_form)
