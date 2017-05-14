@@ -10,6 +10,7 @@
 5. Run `python src/manage.py runserver`
 6. Open new terminal in the same location
 7. Run `python src/manage.py process_tasks --sleep 1`
+8. Open web browser and go to 127.0.0.1:8000. 
 
 ## Adding new analyzers
 1. Go to file src/utils/analyzers.py
